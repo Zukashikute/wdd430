@@ -8,6 +8,8 @@ import { ServerComponent } from './server/server.component';
 import { ServersComponent } from './servers/servers.component';
 import { SuccessAlertComponent } from './successalert/successalert.component';
 import { WarningAlertComponent } from './warningalert/warningalert.component';
+import { TwowayComponent } from './twoway/twoway.component';
+import { DirectiveComponent } from './directive/directive.component';
 
 @NgModule({
   declarations: [
@@ -16,8 +18,10 @@ import { WarningAlertComponent } from './warningalert/warningalert.component';
     ServersComponent,
     WarningAlertComponent,
     SuccessAlertComponent,
+    TwowayComponent,
+    DirectiveComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
