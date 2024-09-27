@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading cl-panel-heading">
+        <h2>Contacts</h2>
+        <a href="#" class="btn btn-success">New Contact</a>
+      </div>
+      <div class="cl-panel-body">
+        <div
+          class="cl-panel-body-wrapper panel panel-default"
+          *ngFor="let contact of contacts"
+        >
+          <h4 class="">{{ contact.name }}</h4>
+          <img src="{{ contact.imageUrl }}" alt="{{ contact.name }}" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

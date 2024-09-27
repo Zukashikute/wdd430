@@ -1,0 +1,27 @@
+.cd-panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  > div {
+    display: flex;
+  }
+
+  h2 {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .cd-panel-heading-btn-wrapper {
+    display: flex;
+    gap: 0.5rem;
+  }
+}
+
+.cd-panel-body {
+  padding: 15px;
+
+  h5 {
+    font-weight: 600;
+  }
+}

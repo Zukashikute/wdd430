@@ -1,0 +1,25 @@
+.cl-panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h2 {
+    margin: 0;
+    font-weight: 700;
+  }
+}
+
+.cl-panel-body {
+  padding: 15px;
+
+  .cl-panel-body-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    margin-bottom: 0;
+
+    img {
+      height: 80px;
+    }
+  }
+}
