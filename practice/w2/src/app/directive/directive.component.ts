@@ -8,11 +8,11 @@ import { Component } from '@angular/core';
 export class DirectiveComponent {
   count = 0;
   isShowing = false;
-  logs: number[] = [];
+  logs: any[] = [];
 
   toggleItem() {
     this.isShowing = !this.isShowing; // Toggle visibility
-    this.logs.push(this.logs.length + 1);
+    this.logs.push(new Date());
     if (this.isShowing) {
       this.count++; // Increment count only when showing the item
     }
