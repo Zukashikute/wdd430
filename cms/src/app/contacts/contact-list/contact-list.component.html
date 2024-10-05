@@ -6,13 +6,11 @@
         <a href="#" class="btn btn-success">New Contact</a>
       </div>
       <div class="cl-panel-body">
-        <div
-          class="cl-panel-body-wrapper panel panel-default"
-          *ngFor="let contact of contacts"
-        >
-          <h4 class="">{{ contact.name }}</h4>
-          <img src="{{ contact.imageUrl }}" alt="{{ contact.name }}" />
-        </div>
+        <cms-contact-item
+          *ngFor="let contactEl of contacts"
+          [contact]="contactEl"
+          (selectedContactEvent)="onSelected(contactEl)"
+        ></cms-contact-item>
       </div>
     </div>
   </div>
