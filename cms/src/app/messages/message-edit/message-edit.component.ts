@@ -1,11 +1,6 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Message } from '../message.model';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'cms-message-edit',
@@ -15,8 +10,9 @@ import { Message } from '../message.model';
 export class MessageEditComponent {
   @ViewChild('subject') subjectInputRef: ElementRef;
   @ViewChild('msgText') msgTextInputRef: ElementRef;
-  @Output() addMessageEvent = new EventEmitter<Message>();
-  currentSender: string = 'Jared';
+  currentSender = Math.floor(Math.random() * 18) + 1;
+
+  constructor(private messageService: MessageService) {}
 
   onSendMessage(event: Event) {
     event.preventDefault();
@@ -24,9 +20,9 @@ export class MessageEditComponent {
       '1',
       this.subjectInputRef.nativeElement.value,
       this.msgTextInputRef.nativeElement.value,
-      this.currentSender
+      this.currentSender.toString()
     );
-    this.addMessageEvent.emit(newMessage);
+    this.messageService.addMessage(newMessage);
   }
 
   onClear() {
