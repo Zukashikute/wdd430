@@ -7,14 +7,17 @@ import { ContactService } from '../contact.service';
   templateUrl: './contact-list.component.html',
   styleUrl: './contact-list.component.scss',
 })
-export class ContactListComponent implements OnInit{
-
+export class ContactListComponent implements OnInit {
   contacts: Contact[] = [];
 
   constructor(private contactService: ContactService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.contacts = this.contactService.getContacts();
+
+    this.contactService.contactChangedEvent.subscribe((contacts: Contact[]) => {
+      this.contacts = contacts;
+    });
   }
 
   onSelected(contact: Contact) {
