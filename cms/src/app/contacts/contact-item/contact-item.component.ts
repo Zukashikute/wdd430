@@ -13,6 +13,6 @@ export class ContactItemComponent {
   constructor(private contactService: ContactService) {}
 
   onSelectContact() {
-    this.contactService.contactSelectedEvent.emit(this.contact);
+    this.contactService.contactSelectedEvent.next(this.contact);
   }
 }
