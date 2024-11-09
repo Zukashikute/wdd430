@@ -70,14 +70,6 @@ export class ContactEditComponent implements OnInit {
     this.router.navigate(['contacts']);
   }
 
-  onDrop(event: CdkDragDrop<Contact[]>) {
-    const movedItem = event.item.data;
-    const previousIndex = event.previousIndex;
-    const currentIndex = event.currentIndex;
-
-    moveItemInArray(this.groupContacts, previousIndex, currentIndex);
-  }
-
   isContactInGroup(contact: Contact) {
     return this.groupContacts.some(
       (existingContact) => existingContact.id === contact.id
