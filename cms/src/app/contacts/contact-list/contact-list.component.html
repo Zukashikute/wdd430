@@ -5,11 +5,19 @@
         <h2>Contacts</h2>
         <a class="btn btn-success" routerLink="new">New Contact</a>
       </div>
-      <div class="cl-panel-body">
-        <cms-contact-item
-          *ngFor="let contactEl of contacts"
-          [contact]="contactEl"
-        ></cms-contact-item>
+      <div
+        class="cl-panel-body"
+        cdkDropList
+        [cdkDropListData]="contacts"
+        (cdkDropListDropped)="onDrop($event)"
+      >
+        <div
+          *ngFor="let contactEl of contacts; let i = index"
+          cdkDrag
+          [cdkDragData]="contactEl"
+        >
+          <cms-contact-item [contact]="contactEl"></cms-contact-item>
+        </div>
       </div>
     </div>
   </div>

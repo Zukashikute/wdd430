@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Contact } from '../contact.model';
 import { ContactService } from '../contact.service';
 import { Subscription } from 'rxjs';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'cms-contact-list',
@@ -28,7 +29,17 @@ export class ContactListComponent implements OnInit, OnDestroy {
     this.contactService.contactSelectedEvent.next(contact);
   }
 
-  ngOnDestroy(): void {
+  isDraggable(contact: any) {
+    return contact.isActive; 
+  }
+
+  onDrop(event: CdkDragDrop<any[]>) {
+    const previousIndex = event.previousIndex;
+    const currentIndex = event.currentIndex;
+    moveItemInArray(this.contacts, previousIndex, currentIndex);
+  }
+
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 }
