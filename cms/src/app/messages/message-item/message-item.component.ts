@@ -14,9 +14,28 @@ export class MessageItemComponent implements OnInit {
   constructor(private contactService: ContactService) {}
 
   ngOnInit() {
-    const contact: Contact = this.contactService.getContact(
-      this.message.sender
+    // const contact: Contact = this.contactService.getContact(
+    //   this.message.sender
+    // );
+    // console.log(contact)
+    // this.messageSender = contact.name;
+
+    // Wait until contacts are available
+    this.contactService.contactListChangedEvent.subscribe(
+      (contacts: Contact[]) => {
+        const contact = this.contactService.getContact(this.message.sender);
+        if (contact) {
+          this.messageSender = contact.name;
+        } else {
+          console.error(`Contact with ID ${this.message.sender} not found.`);
+          this.messageSender = 'Unknown Sender'; // Fallback value
+        }
+      }
     );
-    this.messageSender = contact.name;
+
+    // If contacts are not yet fetched, fetch them
+    if (this.contactService.contacts.length === 0) {
+      this.contactService.getContacts();
+    }
   }
 }

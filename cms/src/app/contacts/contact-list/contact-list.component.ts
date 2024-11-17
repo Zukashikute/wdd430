@@ -12,11 +12,12 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 export class ContactListComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   contacts: Contact[] = [];
+  term: string;
 
   constructor(private contactService: ContactService) {}
 
   ngOnInit() {
-    this.contacts = this.contactService.getContacts();
+    this.contactService.getContacts();
 
     this.subscription = this.contactService.contactListChangedEvent.subscribe(
       (contactList: Contact[]) => {
@@ -29,8 +30,12 @@ export class ContactListComponent implements OnInit, OnDestroy {
     this.contactService.contactSelectedEvent.next(contact);
   }
 
+  search(value: string) {
+    this.term = value;
+  }
+
   isDraggable(contact: any) {
-    return contact.isActive; 
+    return contact.isActive;
   }
 
   onDrop(event: CdkDragDrop<any[]>) {

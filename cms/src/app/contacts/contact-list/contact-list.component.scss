@@ -1,11 +1,6 @@
 .cl-panel-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  h2 {
-    margin: 0;
-    font-weight: 700;
+  > div {
+    margin: 0rem 0.15rem;
   }
 }
 

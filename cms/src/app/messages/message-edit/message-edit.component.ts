@@ -12,15 +12,19 @@ export class MessageEditComponent {
   @ViewChild('msgText') msgTextInputRef: ElementRef;
   currentSender = Math.floor(Math.random() * 18) + 1;
 
-  constructor(private messageService: MessageService) {}
+  constructor(
+    private messageService: MessageService,
+  ) {}
 
   onSendMessage(event: Event) {
     event.preventDefault();
+    const senderId = this.currentSender.toString();
+ 
     const newMessage = new Message(
       '1',
       this.subjectInputRef.nativeElement.value,
       this.msgTextInputRef.nativeElement.value,
-      this.currentSender.toString()
+      senderId
     );
     this.messageService.addMessage(newMessage);
   }
