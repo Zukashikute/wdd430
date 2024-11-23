@@ -5,7 +5,7 @@ var http = require("http");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-const cors = require('cors')
+const cors = require("cors");
 
 // import the routing file to handle the default (index) route
 var index = require("./server/routes/app");
@@ -19,6 +19,7 @@ var app = express(); // create an instance of express
 
 // Tell express to use the following parsers for POST data
 app.use(bodyParser.json());
+app.use(cors());
 app.use(
   bodyParser.urlencoded({
     extended: false,
