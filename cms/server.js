@@ -5,11 +5,15 @@ var http = require("http");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+const cors = require('cors')
 
 // import the routing file to handle the default (index) route
 var index = require("./server/routes/app");
 
 // ... ADD CODE TO IMPORT YOUR ROUTING FILES HERE ...
+const messageRoutes = require("./server/routes/messages");
+const contactRoutes = require("./server/routes/contacts");
+const documentsRoutes = require("./server/routes/documents");
 
 var app = express(); // create an instance of express
 
@@ -46,10 +50,6 @@ app.use(express.static(path.join(__dirname, "dist/cms")));
 app.use("/", index);
 
 // ... ADD YOUR CODE TO MAP YOUR URL'S TO ROUTING FILES HERE ...
-const messageRoutes = require("./server/routes/messages");
-const contactRoutes = require("./server/routes/contacts");
-const documentsRoutes = require("./server/routes/documents");
-
 app.use("/messages", messageRoutes);
 app.use("/contacts", contactRoutes);
 app.use("/documents", documentsRoutes);
