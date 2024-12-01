@@ -16,42 +16,19 @@ export class MessageService {
   }
 
   getMessages() {
-    this.http
-      .get<Message[]>(
-        'https://wdd430-cms-d3a04-default-rtdb.asia-southeast1.firebasedatabase.app/messages.json'
-      )
-      .subscribe(
-        (messages: Message[]) => {
-          this.messages = messages || [];
-          this.maxContactId = this.getMaxId();
-          this.messageChangedEvent.next(this.messages.slice());
-        },
-        (error: any) => {
-          console.error('Error fetching contacts:', error);
-        }
-      );
+    this.http.get<Message[]>('http://localhost:3000/messages').subscribe(
+      (messages: Message[]) => {
+        this.messages = messages || [];
+        this.maxContactId = this.getMaxId();
+        this.messageChangedEvent.next(this.messages.slice());
+      },
+      (error: any) => {
+        console.error('Error fetching messages:', error);
+      }
+    );
   }
 
-  storeMessages() {
-    const stringifyDoc = JSON.stringify(this.messages);
-    console.log('Data being sent to Firebase:', stringifyDoc);
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
-    this.http
-      .put(
-        'https://wdd430-cms-d3a04-default-rtdb.asia-southeast1.firebasedatabase.app/messages.json',
-        stringifyDoc,
-        { headers }
-      )
-      .subscribe(
-        () => {
-          this.messageChangedEvent.next(this.messages.slice());
-        },
-        (error) => {
-          console.error('Error on updating messages on the server:', error);
-        }
-      );
-  }
+  storeMessages() {}
 
   getMessage(id: string) {
     return this.messages.find((doc) => doc.id === id) || null;
@@ -70,8 +47,24 @@ export class MessageService {
     return maxId;
   }
 
-  addMessage(message: Message) {
-    this.messages.push(message);
-    this.storeMessages();
+  addMessage(newMessage: Message) {
+    // ;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    this.http
+      .post<{ message: string; newMessage: Message }>(
+        'http://localhost:3000/messages',
+        newMessage,
+        { headers }
+      )
+      .subscribe({
+        next: (responseData) => {
+          this.messages.push(responseData.newMessage);
+          this.messageChangedEvent.next(this.messages.slice());
+        },
+        error: (error) => {
+          console.error('Error on updating messages on the server:', error);
+        },
+      });
   }
 }
